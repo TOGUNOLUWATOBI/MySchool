@@ -1,0 +1,12 @@
+com\school\Entity\QTeacher.class
+com\school\Dao\CourseDao.class
+com\school\Utils\HibernateUtil.class
+com\school\Utils\HibernateUtil$TransactionTask.class
+com\school\Entity\Student.class
+com\school\Dao\TeacherDao.class
+com\school\App.class
+com\school\Entity\Course.class
+com\school\Entity\QCourse.class
+com\school\Dao\StudentDao.class
+com\school\Entity\Teacher.class
+com\school\Entity\QStudent.class
