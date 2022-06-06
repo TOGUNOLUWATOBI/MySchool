@@ -45,4 +45,17 @@ public class TeacherDao {
         });
         return reference.get();
     }
+
+    public static Teacher getRandomTeacher() {
+        AtomicReference<Teacher> reference = new AtomicReference<>();
+        HibernateUtil.doTransaction(session ->
+        {
+            JPAQuery<Teacher> query = new JPAQuery<>(session.getSessionFactory().createEntityManager());
+            QTeacher qTeacher = QTeacher.teacher;
+            Teacher teacher = query.select(qTeacher).
+                    from(qTeacher).fetchOne();
+            reference.set(teacher);
+        });
+        return reference.get();
+    }
 }

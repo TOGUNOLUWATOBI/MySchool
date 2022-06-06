@@ -9,9 +9,7 @@ import com.school.Dao.TeacherDao;
 import com.school.Entity.Course;
 import com.school.Entity.Student;
 import com.school.Entity.Teacher;
-import com.school.Utils.HibernateUtil;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -30,8 +28,8 @@ public class App
     private static final int OPTION_VIEW_ASSIGNED_TEACHER_TO_STUDENT = 7;
     private static final int OPTION_QUIT = 8;
 
-    private static Scanner scanner;
-    private static ObjectMapper objectMapper;
+    private static final Scanner scanner;
+    private static final ObjectMapper objectMapper;
     
     static {
         scanner = new Scanner(System.in);
@@ -47,7 +45,7 @@ public class App
 
     public static void main( String[] args )
     {
-        
+
         boolean quitter=false;
         while(!quitter)
         {
@@ -129,9 +127,9 @@ public class App
     private static void registerStudent() {
         String matricNumber;
         String studentName;
-        boolean studentExist=true;
+        boolean studentExist=false;
 
-        while(studentExist)
+        while(!studentExist)
         {
             System.out.print("Enter your matric number: ");
             matricNumber=scanner.next().trim();
@@ -148,7 +146,7 @@ public class App
             {
                 StudentDao.addStudent(new Student(matricNumber,studentName));
                 System.out.println("Student successfully registered");
-                studentExist=false;
+                studentExist=true;
             }
         }
     }
@@ -219,7 +217,11 @@ public class App
 
     private static boolean assignTeacher()
     {
-        System.out.print("Enter the matric number of the student");
+        System.out.print("Enter the matric number of the student: ");
+        String matricNumber= scanner.next().trim();
+        Student student = StudentDao.getStudent(matricNumber);
+        Teacher teacher=TeacherDao.getRandomTeacher();
+        StudentDao.assignTeacherToStudent(student,teacher);
         return true;
     }
 
