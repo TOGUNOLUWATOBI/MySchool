@@ -47,15 +47,7 @@ public class App
 
     public static void main( String[] args )
     {
-        CourseDao.addCourse(new Course("intro to java","csc111"));
-        CourseDao.addCourse(new Course("intro to c#","csc222"));
-        CourseDao.addCourse(new Course("intro to python","csc333"));
-        CourseDao.addCourse(new Course("intro to python","csc444"));
-        CourseDao.addCourse(new Course("intro to python","csc555"));
-        CourseDao.addCourse(new Course("intro to python","csc666"));
-        CourseDao.addCourse(new Course("intro to python","csc777"));
-        CourseDao.addCourse(new Course("intro to python","csc888"));
-
+        
         boolean quitter=false;
         while(!quitter)
         {
