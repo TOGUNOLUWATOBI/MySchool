@@ -6,6 +6,7 @@ import com.school.Entity.Teacher;
 import com.school.Utils.HibernateUtil;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class TeacherDao {
@@ -46,16 +47,11 @@ public class TeacherDao {
         return reference.get();
     }
 
-    public static Teacher getRandomTeacher() {
-        AtomicReference<Teacher> reference = new AtomicReference<>();
-        HibernateUtil.doTransaction(session ->
-        {
-            JPAQuery<Teacher> query = new JPAQuery<>(session.getSessionFactory().createEntityManager());
-            QTeacher qTeacher = QTeacher.teacher;
-            Teacher teacher = query.select(qTeacher).
-                    from(qTeacher).fetchOne();
-            reference.set(teacher);
-        });
-        return reference.get();
+    public static Teacher getRandomTeacher()
+    {
+        List<Teacher> teachers = getAllTeachers();
+        Random rand = new Random();
+        return teachers.get(rand.nextInt(teachers.size()));
+
     }
 }
