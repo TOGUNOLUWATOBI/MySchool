@@ -1,5 +1,6 @@
 package com.school.Dao;
 
+import com.google.common.base.Preconditions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.school.Entity.QTeacher;
 import com.school.Entity.Teacher;
@@ -12,6 +13,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class TeacherDao {
     public static boolean addTeacher (Teacher teacher)
     {
+        Preconditions.checkNotNull(teacher,"teacher cant be null");
         return HibernateUtil.doTransaction(session -> session.save(teacher));
     }
 
@@ -33,6 +35,7 @@ public class TeacherDao {
 
     public static Teacher getTeacher(int id)
     {
+        Preconditions.checkNotNull(id,"id cant be null");
         AtomicReference<Teacher> reference=new AtomicReference<>();
         HibernateUtil.doTransaction(session ->
         {

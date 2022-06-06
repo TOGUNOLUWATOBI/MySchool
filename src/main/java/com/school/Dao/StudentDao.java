@@ -19,6 +19,7 @@ public class StudentDao {
     static ObjectMapper objectMapper = new ObjectMapper();
     public static boolean addStudent (Student student)
     {
+        Preconditions.checkNotNull(student,"student cant be null");
         return HibernateUtil.doTransaction(session -> session.save(student));
     }
 
@@ -39,6 +40,7 @@ public class StudentDao {
 
     public static Student getStudent(String matnum)
     {
+        Preconditions.checkNotNull(matnum,"matric number cant be null");
         AtomicReference<Student> reference= new AtomicReference<>();
         HibernateUtil.doTransaction(session ->
         {
@@ -54,6 +56,7 @@ public class StudentDao {
     }
 
     public static String getAssignedTeacher(Student std) throws JsonProcessingException {
+        Preconditions.checkNotNull(std,"student cant be null");
         AtomicReference<Teacher> reference=new AtomicReference<>();
         HibernateUtil.doTransaction(session ->
         {
@@ -153,6 +156,8 @@ public class StudentDao {
 
     public static List<Course> getAllRegisteredCourses(Student student)
     {
+        Preconditions.checkNotNull(student,"student cant be null");
+
         List<Course> list =new ArrayList<>();
         AtomicReference<List<Course>> references = new AtomicReference<>();
         HibernateUtil.doTransaction(session -> {
